@@ -1,7 +1,5 @@
 package com.cafe24.security;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebArgumentResolver;
