@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cafe24.jblog.service.BlogService;
+import com.cafe24.jblog.vo.BlogVo;
 import com.cafe24.jblog.vo.CategoryVo;
+import com.cafe24.jblog.vo.PostVo;
 
 @Controller
 @RequestMapping(value = "/blog")
@@ -24,17 +26,29 @@ public class BlogController {
 	@RequestMapping(value = {"/{id}", "/{id}/main" }, method=RequestMethod.GET)
 	public String main(@PathVariable("id") String id, 
 			Model model) {
-//		List<CategoryVo> categoryList = blogService.getCategoryList(id);
-//		List<PostVo> postList = blogService.getCategoryList;
-//		List<BlogVo> blogList = blogService.getCategoryList;
-//		model.addAttribute("list", list);
-//		model.addAttribute("categoryList", categoryList);
-//		for(int i =0; i<categoryList.size(); i++) {
-//			System.out.println(categoryList.get(i));
-//		}
-		System.out.println("id : ");
+		List<CategoryVo> categoryList = blogService.getCategoryList(id);
+		List<PostVo> postList = blogService.getPostList(id);
+		BlogVo blogvo = blogService.getBlog(id);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("postList", postList);
+		model.addAttribute("blogvo", blogvo);
+		System.out.println("id : "+id);
 		return "blog/blog-main";
 	}
+	
+	@RequestMapping(value = {"/{id:{?!assets).*}/{categoryNo}/{postNo}"})
+	public String post(
+			@PathVariable("{id}") String id,
+			@PathVariable("{categoryNo}") Optional<Long> categoryNo,
+			@PathVariable("{postNo}") Optional<Long> postNo,
+			Model model){
+		System.out.println("id : " + id);
+		System.out.println("cate: " + categoryNo);
+		System.out.println("postNo : " + postNo);
+		return "blog/result";		
+	}
+	
+	
 
 	
 

@@ -36,9 +36,9 @@
 		]]>
 	</select>
 	
-	<insert id="insert_cat" parameterType='categoryvo'>
+	<insert id="insertCategory" parameterType='categoryvo'>
 		<![CDATA[
-			insert into categoryvo values(null, #{name }, #{description }, now(), #{id});
+			insert into category values(null, #{name }, #{description }, now(), #{id});
 		]]>
 	</insert>
 	
@@ -54,5 +54,21 @@
 			select no, title, content, reg_date, category_no from category where id=#{id};
 		]]>
 	</select>
+	
+	<select id="getBlogList" resultType="blogvo" parameterType="int">
+		<![CDATA[
+			select id, title, logo from blog where id=#{id }; 
+		]]>
+	</select>
+	
+	<select id="getPostList" resultType="postgvo" parameterType="int">
+		<![CDATA[
+			select p.no, p.title, p.content, p.reg_date, p.category_no
+			from category c, user u, post p 
+			where c.id=u.id and c.no=p.category_no and u.id=#{id} 
+			order by p.reg_date;
+		]]>
+	</select>
+	
 
 </mapper>

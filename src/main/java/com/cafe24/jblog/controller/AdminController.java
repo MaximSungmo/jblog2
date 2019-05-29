@@ -40,9 +40,10 @@ public class AdminController {
 	
 	@RequestMapping(value = "/{id}/admin/category", method = RequestMethod.GET)
 	public String adminCategory(
-			@PathVariable("id") String id, 
+			@PathVariable("id") String id,
+			@ModelAttribute("categoryvo") CategoryVo categoryVo,
 			Model model) {
-		
+		System.out.println(categoryVo);
 		model.addAttribute("id", id);
 		return "blog/blog-admin-category";
 	}
@@ -54,7 +55,7 @@ public class AdminController {
 			) {
 		System.out.println("addCategory Mehod :" + categoryVo);
 		blogService.addCategory(categoryVo);
-		return "redirect:/blog/blog-admin-category";
+		return "/blog/blog-admin-category";
 	}
 	
 	

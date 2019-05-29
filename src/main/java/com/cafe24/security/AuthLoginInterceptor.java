@@ -19,7 +19,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		System.out.println("------->");
+		System.out.println("----89897798798987--->");
 		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
