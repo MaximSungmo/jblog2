@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="blog">
+
+	
+
+	<!--  
+	<resultMap type="blogvo" id="blogvo1">
+		<result column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="logo" property="logo" />
+	</resultMap>
+	<resultMap type="categoryvo" id="categoryvo1">
+		<result column="no" property="no" />
+		<result column="name" property="name" />
+		<result column="description" property="description" />
+		<result column="reg_date" property="reg_date" />
+		<collection property="blogvo1" resultMap="blogvo1"/>
+	</resultMap>
+	
+	<select id="getById" resultMap="categoryvo1" parameterType='blogvo'>
+		<![CDATA[
+			select b.id, b.title, b.logo, c.no, c.name, c.description, c.reg_date from blog b, category c where c.id=b.id and b.id=010;
+		]]>
+	</select>
+	-->
+	<select id="getById" resultType="blogvo" parameterType='string'>
+		<![CDATA[
+			select * from blog where id=#{id};
+		]]>
+	</select>
+	
+	<select id="getById_cat" resultType="categoryvo" parameterType='string'>
+		<![CDATA[
+			select * from category where id=#{id};
+		]]>
+	</select>
+	
+	<insert id="insert_cat" parameterType='categoryvo'>
+		<![CDATA[
+			insert into categoryvo values(null, #{name }, #{description }, now(), #{id});
+		]]>
+	</insert>
+	
+	
+	<select id="getCategoryList" resultType="categoryvo" parameterType="String">
+		<![CDATA[
+			select no, name, description, reg_date, id from category where id=#{id};
+		]]>
+	</select>
+	
+	<select id="getPostList" resultType="postvo" parameterType="int">
+		<![CDATA[
+			select no, title, content, reg_date, category_no from category where id=#{id};
+		]]>
+	</select>
+
+</mapper>
