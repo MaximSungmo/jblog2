@@ -18,9 +18,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		System.out.println("----89897798798987--->");
-		
+				
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
@@ -43,7 +41,6 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", authUser);
 		response.sendRedirect( request.getContextPath() );
-
 		return false;
 	}
 

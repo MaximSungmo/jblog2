@@ -28,11 +28,12 @@
 				<form action="" method="post">
 					<table class="admin-cat-write">
 						<tr>
-							<td class="t">제목</td>
+							<td class="title">제목</td>
 							<td><input type="text" size="60" name="title"> 
-								<select name="category">
-										<option>미분류</option>
-										<option>자바</option>
+								<select name="category_no">
+									<c:forEach items='${categoryList }' var='categoryvo' varStatus='status'>
+										<option  value="${categoryvo.no }">${categoryvo.name }</option>
+									</c:forEach>
 								</select>
 							</td>
 						</tr>

@@ -33,19 +33,21 @@
 				</property>
 			</bean>
 		</mvc:message-converters>
-		
+
 		<!-- Argument Resolvers -->
 		<mvc:argument-resolvers>
-			<bean class="com.cafe24.security.AuthUserHandlerMethodArgumentResolver"/>
+			<bean
+				class="com.cafe24.security.AuthUserHandlerMethodArgumentResolver" />
 		</mvc:argument-resolvers>
-		
+
 	</mvc:annotation-driven>
 
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler />
 
- 	<!-- the mvc resources url mapping -->
-	<mvc:resources mapping="/images/**" location="file:/jblog-uploads/" />
+	<!-- the mvc resources url mapping -->
+	<mvc:resources mapping="/assets/image/**"
+		location="file:/jblog-uploads/" />
 
 
 	<!-- ViewResolver 설정 -->
@@ -77,15 +79,20 @@
 			<mvc:mapping path="/user/logout" />
 			<bean class="com.cafe24.security.AuthLogoutInterceptor" />
 		</mvc:interceptor>
-		<!-- 
+
+		<mvc:interceptor>
+			<mvc:mapping path="/*/admin/**" />
+			<bean class="com.cafe24.security.AuthAdminInterceptor" />
+		</mvc:interceptor>
+
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/user/auth"/>
-			<mvc:exclude-mapping path="/user/logout"/>
-			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/user/auth" />
+			<mvc:exclude-mapping path="/user/logout" />
+			<mvc:exclude-mapping path="/assets/**" />
+			<mvc:exclude-mapping path="/*/admin/**" />
 			<bean class="com.cafe24.security.AuthInterceptor" />
 		</mvc:interceptor>
-		 -->
 	</mvc:interceptors>
 
 	<!-- 빈설정을 annotation으로 하겠다.(@Controller에 auto scanning) -->
@@ -93,5 +100,16 @@
 	<!-- Controller Scanning 하는 base package 지정 -->
 	<context:component-scan
 		base-package="com.cafe24.jblog.controller, com.cafe24.jblog.controller.api, com.cafe24.jblog.exception" />
+
+	<!-- 멀티파트 리졸버 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대업로드 가능한 바이트크기 -->
+		<property name="maxUploadSize" value="52428800" />
+		<!-- 디스크에 임시 파일을 생성하기 전에 메모리에 보관할수있는 최대 바이트 크기 -->
+		<!-- property name="maxInMemorySize" value="52428800" / -->
+		<!-- defaultEncoding -->
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
 
 </beans>

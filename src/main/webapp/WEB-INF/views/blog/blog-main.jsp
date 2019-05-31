@@ -20,19 +20,22 @@
 	<div id="container">
 		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
 
-
-
+		
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
-					<h4>Spring Camp 2016 참여기</h4>
-					<h1>${ids }</h1>
-					<p>${content }
+					<h4>${postvo.title }</h4>
 					<p>
+					${postvo.content }
+					<c:if test="${postNo eq null }">
+					<h1>게시글이 없습니다.</h1>
+					</c:if>
+					</p>
 				</div>
 				<ul class="blog-list">
-					<li><a href="">Spring Camp 2016 참여기</a> <span>2015/05/02</span>
-					</li>
+					<c:forEach items='${postList}' var='postvo' varStatus='status'>
+					<li><a href="${pageContext.request.contextPath}/${id}/${categoryNo}/${postvo.no}">${postvo.title }</a> <span>${postvo.reg_date }</span></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -40,7 +43,7 @@
 		<div id="extra">
 			<div class="blog-logo">
 				<img
-					src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+					src="${pageContext.servletContext.contextPath }/assets/image/${blogvo.logo}">
 			</div>
 		</div>
 
@@ -50,7 +53,7 @@
 			<c:set var='count' value='${fn:length(categoryList) }' />
 				<ul>
 			<c:forEach items='${categoryList }' var='categoryvo' varStatus='status'>
-					<li><a href="${pageContext.request.contextPath}/blog/${categoryvo.id }/${categoryvo.no}">${categoryvo.name } </a></li>
+					<li><a href="${pageContext.request.contextPath}/${id }/${categoryvo.no}">${categoryvo.name } </a></li>
 			</c:forEach>
 				</ul>
 		</div>

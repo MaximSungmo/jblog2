@@ -7,7 +7,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.cafe24.jblog.vo.UserVo;
 
-public class AuthInterceptor extends HandlerInterceptorAdapter {
+public class AuthAdminInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -21,8 +21,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// 2. casting
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 
-		// 3. Method의 @Auth 받아오기
-		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
+		// 3. Method의 @AuthAdmin 받아오기
+		AuthAdmin authAdmin = handlerMethod.getMethodAnnotation(AuthAdmin.class);
 
 		// 4. Method에 @Auth 없으면
 		// Class(Type)에 @Auth를 받아오기
@@ -31,7 +31,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// }
 
 		// 5. @Auth가 안 붙어있는 경우
-		if (auth == null) {
+		if (authAdmin == null) {
 			return true;
 		}
 
@@ -49,6 +49,26 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}
+		
+//		if(authUser.getId() != request.getParameter("id")) {
+//			response.sendRedirect(request.getContextPath() + "/user/login");
+//			return false;
+//		}
+		
+		
+		
+		String[] list = request.getRequestURI().split("/");
+		if(list.length>3) {
+			if("admin".equals(list[3])) {
+				if((authUser.getId()).equals(list[2])) {
+					return true;
+				}
+			}
+		}
+		
+		response.sendRedirect(request.getContextPath() + "/"+list[2]+"/");
+		return false;
+		
 
 		// 7. Role 가져오기
 		// Auth.Role role = auth.role();
@@ -64,7 +84,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// authUser.getRole().equals("ADMIN")
 		//
 
-		return true;
 	}
 
 }

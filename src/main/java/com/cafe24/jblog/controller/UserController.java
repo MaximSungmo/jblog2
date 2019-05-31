@@ -39,6 +39,12 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "user/login";
+	}	
+	
+	
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	public String auth() {
+		return "redirect:/main";
 	}		
 	
 }

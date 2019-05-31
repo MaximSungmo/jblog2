@@ -12,7 +12,7 @@
 <body>
 
 	<div id="header">
-		<h1><a href="${pageContext.request.contextPath}/blog">Spring 이야기</a></h1>
+		<h1><a href="${pageContext.request.contextPath}/${authUser.id }/admin/basic">${blogvo.title }</a></h1>
 		<ul>
 			<c:choose>
 			<c:when test="${empty authUser }">

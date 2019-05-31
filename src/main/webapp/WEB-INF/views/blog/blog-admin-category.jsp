@@ -25,6 +25,7 @@
 				<c:import url='/WEB-INF/views/includes/adminMenubar.jsp'>
 					<c:param name="menu" value="category" />
 				</c:import>
+				
 				<table class="admin-cat">
 					<tr>
 						<th>번호</th>
@@ -33,30 +34,29 @@
 						<th>설명</th>
 						<th>삭제</th>
 					</tr>
-					<tr>
-						<td>3</td>
-						<td>미분류</td>
-						<td>10</td>
-						<td>카테고리를 지정하지 않은 경우</td>
-						<td><img
-							src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>스프링 스터디</td>
-						<td>20</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img
-							src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>스프링 프로젝트</td>
-						<td>15</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img
-							src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
+					
+					<c:set var='count' value='${fn:length(categoryList) }' />
+					<c:forEach items='${categoryList }' var='categoryvo' varStatus='status'>
+						<tr>
+							<td>${status.index +1}</td>
+							<td>${categoryvo.name }</td>
+							<td>${categoryvo.countPost }</td>
+							<td>${categoryvo.description }</td>
+							<td>
+							<!-- 기본카테고리는 삭제가 불가능하도록 작업 -->
+							<c:choose>
+							<c:when test = "${status.index+1 == 1}">
+								
+							</c:when>	
+							<c:otherwise>
+								<a href= "${pageContext.request.contextPath}/${authUser.id}/admin/category/delete/${categoryvo.no}">								
+								<img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
+							</c:otherwise>
+							</c:choose>
+							</td>
+							
+						</tr>
+					</c:forEach>
 				</table>
 
 				<h4 class="n-c">새로운 카테고리 추가</h4>

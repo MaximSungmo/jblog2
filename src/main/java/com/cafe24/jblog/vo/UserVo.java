@@ -5,7 +5,7 @@ public class UserVo {
 	private String id;
 	private String name;
 	private String password;
-	private String regDate;
+	private String reg_date;
 	private String grade;
 	public String getId() {
 		return id;
@@ -25,11 +25,11 @@ public class UserVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRegDate() {
-		return regDate;
+	public String getreg_date() {
+		return reg_date;
 	}
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public void setreg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 	public String getGrade() {
 		return grade;
@@ -39,7 +39,7 @@ public class UserVo {
 	}
 	@Override
 	public String toString() {
-		return "UserVo [id=" + id + ", name=" + name + ", password=" + password + ", regDate=" + regDate + ", grade="
+		return "UserVo [id=" + id + ", name=" + name + ", password=" + password + ", reg_date=" + reg_date + ", grade="
 				+ grade + "]";
 	}
 	

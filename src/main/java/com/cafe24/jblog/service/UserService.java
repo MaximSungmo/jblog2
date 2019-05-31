@@ -3,7 +3,7 @@ package com.cafe24.jblog.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cafe24.jblog.dao.UserDAO;
+import com.cafe24.jblog.repository.UserDAO;
 import com.cafe24.jblog.vo.UserVo;
 
 @Service
@@ -21,4 +21,7 @@ public class UserService {
 		return userDAO.login(userVo);
 	}
 	
+	public boolean checkId(String id) {
+		return userDAO.checkId(id)!=null;
+	}
 }

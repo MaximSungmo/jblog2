@@ -1,4 +1,4 @@
-package com.cafe24.jblog.dao;
+package com.cafe24.jblog.repository;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,12 @@ public class UserDAO {
 	public UserVo login(UserVo userVo) {
 		UserVo uservo = sqlSession.selectOne("user.getByIdAndPassword", userVo);
 		return uservo;
+	}
+	
+	public UserVo checkId(String id) {
+		UserVo uservo = sqlSession.selectOne("user.getById", id);
+		return uservo;
+		
 	}
 	
 }
