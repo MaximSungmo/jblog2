@@ -25,7 +25,8 @@
 				<c:import url='/WEB-INF/views/includes/adminMenubar.jsp'>
 					<c:param name="menu" value="write" />
 				</c:import>
-				<form action="" method="post">
+
+				<form:form modelAttribute="postVo" action="${pageContext.request.contextPath}/${authUser.id }/admin/write" method="post">
 					<table class="admin-cat-write">
 						<tr>
 							<td class="title">제목</td>
@@ -37,16 +38,18 @@
 								</select>
 							</td>
 						</tr>
+						<form:errors path="title"/>
 						<tr>
 							<td class="t">내용</td>
 							<td><textarea name="content"></textarea></td>
 						</tr>
+						<form:errors path="content"/>
 						<tr>
 							<td>&nbsp;</td>
 							<td class="s"><input type="submit" value="포스트하기"></td>
 						</tr>
 					</table>
-				</form>
+				</form:form>
 			</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />

@@ -1,10 +1,22 @@
 package com.cafe24.jblog.vo;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class UserVo {
 
+	@NotEmpty
+	@Length(min=2)
 	private String id;
+	
+	@NotEmpty
+	@Length(min=2, max=5)
 	private String name;
+	
+	@NotEmpty
+//	@Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,}")	
 	private String password;
+	
 	private String reg_date;
 	private String grade;
 	public String getId() {

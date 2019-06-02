@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cafe24.jblog.repository.BlogDAO;
 import com.cafe24.jblog.vo.BlogVo;
 import com.cafe24.jblog.vo.CategoryVo;
+import com.cafe24.jblog.vo.PageVo;
 import com.cafe24.jblog.vo.PostVo;
 
 @Service
@@ -37,10 +38,12 @@ public class BlogService {
 	}
 
 	// 게시물 리스트 뽑기
-	public List<PostVo> getPostList(String id, Long categoryNo) {
+	public List<PostVo> getPostList(String id, Long categoryNo, PageVo pagevo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("categoryNo", categoryNo);
+		map.put("startContentNo", pagevo.getStartContentNo());
+		map.put("contentPerPage", pagevo.getContentPerPage());
 		return blogDAO.getPostList(map);
 	}
 
@@ -85,6 +88,11 @@ public class BlogService {
 		blogVo.setTitle((blogVo.getTitle().replaceAll("(?i)<script", "&lt;script")));
 		return blogDAO.updateBlog(blogVo);
 	}
+	
+	public boolean updateBlogTitle(BlogVo blogVo) {
+		blogVo.setTitle((blogVo.getTitle().replaceAll("(?i)<script", "&lt;script")));
+		return blogDAO.updateBlogTitle(blogVo);
+	}
 
 	// 카테고리 삭제
 	public boolean deleteCategory(Map<String, Long> map) {
@@ -94,8 +102,14 @@ public class BlogService {
 		boolean result = deleteCategory && updatePostCategory;
 		return result;
 	}
+	
+	public int getTotalContentCount(Long categoryNo) {
+		return blogDAO.totalContentCount(categoryNo);
+	}
 
 
+	
+	
 
 	/*
 	 * 파일업로드
@@ -148,6 +162,6 @@ public class BlogService {
 		fos.write(data);
 		fos.close();
 		return result;
-	}
+	}	
 
 }

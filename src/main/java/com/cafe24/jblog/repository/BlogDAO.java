@@ -42,6 +42,9 @@ public class BlogDAO {
 	public boolean updateBlog(BlogVo blogVo) {
 		return sqlSession.update("blog.updateBlog",blogVo) == 1;
 	}
+	public boolean updateBlogTitle(BlogVo blogVo) {
+		return sqlSession.update("blog.updateBlogTitle",blogVo)==1;
+	}
 	
 	
 	public PostVo getPost(Map<String, Object> map) {
@@ -66,6 +69,10 @@ public class BlogDAO {
 
 	public boolean deleteCategory(Long no) {
 		return 	sqlSession.delete("blog.deleteCategory", no) ==1;
+	}
+	
+	public int totalContentCount(Long category_no) {
+		return sqlSession.selectOne("blog.totalContentCount", category_no);
 	}
 	
 }

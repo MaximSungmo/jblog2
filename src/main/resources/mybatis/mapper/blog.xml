@@ -75,7 +75,8 @@
 			select p.no, p.title, p.content, p.reg_date, p.category_no
 			from category c, user u, post p 
 			where c.id=u.id and c.no=p.category_no and u.id=#{id} and p.category_no=#{categoryNo}
-			order by p.reg_date desc;
+			order by p.reg_date desc
+			limit #{startContentNo}, #{contentPerPage};
 		]]>
 	</select>
 	
@@ -115,5 +116,19 @@
 			where id=#{id}
 		]]>
 	</update>
+	<update id="updateBlogTitle" parameterType="blogvo">
+		<![CDATA[
+			update blog
+			set title = #{title}
+			where id=#{id}
+		]]>
+	</update>
+	
+	
+	<select id="totalContentCount" resultType='int' parameterType='long'>
+		<![CDATA[
+			select count(*) as totalContentCount from post where category_no = #{category_no} group by category_no ;
+		]]>
+	</select>
 
 </mapper>

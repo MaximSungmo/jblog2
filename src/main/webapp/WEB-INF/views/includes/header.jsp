@@ -12,7 +12,7 @@
 <body>
 
 	<div id="header">
-		<h1><a href="${pageContext.request.contextPath}/${authUser.id }/admin/basic">${blogvo.title }</a></h1>
+		<h1><a href="${pageContext.request.contextPath}/${id }?page=1">${blogvo.title }</a></h1>
 		<ul>
 			<c:choose>
 			<c:when test="${empty authUser }">
@@ -20,7 +20,9 @@
 			</c:when>
 			<c:otherwise>
 				<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
+				<c:if test="${authUser.id == id }">
 				<li><a href="${pageContext.request.contextPath}/${authUser.id }/admin/basic">블로그 관리</a></li>
+				</c:if>
 			</c:otherwise>
 			</c:choose>
 		</ul>

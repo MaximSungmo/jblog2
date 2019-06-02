@@ -67,16 +67,52 @@
 			method="post" action="${pageContext.request.contextPath}/user/join">
 			<label class="block-label" for="name">이름</label>
 			<input id="name" name="name" type="text" value="">
-
+				<!-- 
+			<p>
+				<spring:hasBindErrors name="userVo">
+		            <c:if test="${errors.hasFieldErrors('name') }">                                     
+		               <strong>${errors.getFieldError( 'name' ).defaultMessage }</strong>
+					</c:if>
+				</spring:hasBindErrors>
+			</p>
+		 	-->
+			<p style="font-weight:bold; color:#f00; text-align:left; padding:0; margin:0;">
+				<form:errors path="name"/>
+			</p>
+			
 			<label class="block-label" for="blog-id">아이디</label>
 			<input id="blog-id" name="id" type="text">
 			<input id="btn-checkid" type="button" value="id 중복체크">
 			<img id="img-checkid" style="display: none;"
 				src="${pageContext.request.contextPath}/assets/images/check.png">
-
+			<!-- 
+			<p>
+				<spring:hasBindErrors name="userVo">
+				<c:if test="${errors.hasFieldErrors('id') }">                                     
+	               <strong>${errors.getFieldError( 'id' ).defaultMessage }</strong>
+				</c:if>
+				</spring:hasBindErrors>
+			</p>
+ 			-->
+			<p style="font-weight:bold; color:#f00; text-align:left; padding:0; margin:0;">
+				<form:errors path="id"/>
+			</p>
 			<label class="block-label" for="password">패스워드</label>
 			<input id="password" name="password" type="password" />
-
+			<!-- 
+			<p>
+				<spring:hasBindErrors name="userVo">
+				<c:if test="${errors.hasFieldErrors('password') }">                                     
+	               <strong>${errors.getFieldError( 'password' ).defaultMessage }</strong>
+				</c:if>
+				</spring:hasBindErrors>
+		
+			</p>
+			-->
+			<p style="font-weight:bold; color:#f00; text-align:left; padding:0; margin:0;">
+				<form:errors path="password"/>
+			</p>
+ 			
 			<fieldset>
 				<legend>약관동의</legend>
 				<input id="agree-prov" type="checkbox" name="agreeProv" value="y">

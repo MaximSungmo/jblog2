@@ -3,6 +3,8 @@ package com.cafe24.jblog.vo;
 public class BlogVo {
 
 	private String id;
+	
+	
 	private String title;
 	private String logo;
 	public String getId() {
