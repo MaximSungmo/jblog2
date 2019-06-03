@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,7 +88,7 @@ public class BlogService {
 		blogVo.setTitle((blogVo.getTitle().replaceAll("(?i)<script", "&lt;script")));
 		return blogDAO.updateBlog(blogVo);
 	}
-	
+
 	public boolean updateBlogTitle(BlogVo blogVo) {
 		blogVo.setTitle((blogVo.getTitle().replaceAll("(?i)<script", "&lt;script")));
 		return blogDAO.updateBlogTitle(blogVo);
@@ -101,14 +102,10 @@ public class BlogService {
 		boolean result = deleteCategory && updatePostCategory;
 		return result;
 	}
-	
+
 	public int getTotalContentCount(Long categoryNo) {
 		return blogDAO.totalContentCount(categoryNo);
 	}
-
-
-	
-	
 
 	/*
 	 * 파일업로드
@@ -157,10 +154,22 @@ public class BlogService {
 		boolean result = false;
 
 		byte[] data = multipartFile.getBytes();
+
+		File folder = new File(SAVE_PATH);
+		if (!folder.exists()) {
+			try {
+				folder.mkdir(); // 폴더 생성합니다.
+				System.out.println("폴더가 생성되었습니다.");
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+		} else {
+			System.out.println("이미 폴더가 생성되어 있습니다.");
+		}
+
 		FileOutputStream fos = new FileOutputStream(SAVE_PATH + "/" + saveFileName);
 		fos.write(data);
 		fos.close();
 		return result;
-	}	
-
+	}
 }
