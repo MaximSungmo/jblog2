@@ -58,7 +58,7 @@
 		]]>
 	</select>
 	
-	 <select id="getFirstCategoryNoById" resultType="int" parameterType="string">
+	 <select id="getFirstCategoryNoById" resultType="long" parameterType="string">
 		<![CDATA[
 			select no from category where id=#{id} order by reg_date asc limit 1;
 		]]>

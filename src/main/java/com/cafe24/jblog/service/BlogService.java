@@ -68,9 +68,8 @@ public class BlogService {
 	}
 
 	// Id로 접속 시 첫 카테고리 연결하기
-	public int getFirstCategoryNoById(String id) {
-		if (id == null)
-			return 1;
+	public Long getFirstCategoryNoById(String id) {
+
 		return blogDAO.getFirstCategoryNoById(id);
 	}
 

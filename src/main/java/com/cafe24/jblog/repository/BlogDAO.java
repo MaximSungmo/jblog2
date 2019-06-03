@@ -57,8 +57,8 @@ public class BlogDAO {
 		return result;
 	}
 	
-	public int getFirstCategoryNoById(String id) {
-		int result = sqlSession.selectOne("getFirstCategoryNoById", id);
+	public Long getFirstCategoryNoById(String id) {
+		Long result = sqlSession.selectOne("getFirstCategoryNoById", id);
 		return result;
 	}
 	

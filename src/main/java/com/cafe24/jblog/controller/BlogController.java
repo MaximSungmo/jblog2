@@ -26,6 +26,8 @@ import com.cafe24.jblog.vo.PageVo;
 import com.cafe24.jblog.vo.PostVo;
 import com.cafe24.security.AuthAdmin;
 
+
+
 @Controller
 @RequestMapping(value = { "/{id:(?!assets).*}" })
 public class BlogController {
