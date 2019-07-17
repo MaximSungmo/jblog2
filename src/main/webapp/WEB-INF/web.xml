@@ -14,7 +14,9 @@
 	</welcome-file-list>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>
+			classpath:applicationContext.xml			
+		</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -31,6 +33,8 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
+
+
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>

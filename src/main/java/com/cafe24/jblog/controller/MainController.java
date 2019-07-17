@@ -10,4 +10,24 @@ public class MainController {
 	public String main() {
 		return "main/index";
 	}	
+	
+	@RequestMapping("/forGuest")
+	public String forGuest() {
+		return "forGuest";
+	}
+	
+	@RequestMapping("/forMember")
+	public String forMember() {
+		return "forMember";
+	}
+	
+	@RequestMapping("/forManager")
+	public String forManager() {
+		return "forManager";
+	}
+	
+	@RequestMapping("/forAdmin")
+	public String forAdmin() {
+		return "forAdmin";
+	}
 }

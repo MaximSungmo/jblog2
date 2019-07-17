@@ -25,6 +25,7 @@
 		<form:form modelAttribute="userVo" class="login-form" id="login-form"
 			method="post"
 			action="${pageContext.request.contextPath}/user/auth">
+			<input type="hidden" name="_csrf" value="${CSRF_TOKEN}" />
       		<label>아이디</label> <input type="text" name="id">
       		<label>패스워드</label> <input type="text" name="password">
       		<input type="submit" value="로그인">

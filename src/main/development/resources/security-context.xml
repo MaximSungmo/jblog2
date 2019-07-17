@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+
+
+	<http auto-config='true' use-expressions="true">
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/resources/**" access="permitAll" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+
+		<!-- 
+			로긴 시 url		
+			성공 시 url
+			가져올 정보, id pw
+			실패 시 url
+			always use default 설정하지 않을 시 default taget url로 제대로 가지 않음 
+		-->
+		<form-login login-page="/user/login"	
+			default-target-url="/main" 
+			username-parameter="username"  
+			password-parameter="password" 
+			authentication-failure-url="/error" 
+			always-use-default-target='true'/>
+
+		<!-- 
+			로그아웃 시도 시 url
+			성공 시 이동 url
+		 -->
+		<logout invalidate-session="true" logout-url="/user/logout"
+			logout-success-url="/main" />
+
+		<!-- enable csrf protection -->
+		<csrf />
+	</http>
+
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="userService" />
+	</authentication-manager>
+
+	<beans:bean id="userService" class="com.cafe24.jblog.service.UserService">
+	</beans:bean>
+
+</beans:beans>

@@ -24,4 +24,5 @@ public class UserService {
 	public boolean checkId(String id) {
 		return userDAO.checkId(id)!=null;
 	}
+
 }
